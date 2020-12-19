@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export SETUP_DIR=$(pwd)/../dist
+export WORK_DIR=$(pwd)/../dist
 export DEFAULT_USER=$USER
 export DEFAULT_CERT_HOSTNAME=disk0book.local
 export PROXYCRON_VERSION=v0.6.0-dev
