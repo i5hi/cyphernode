@@ -4,13 +4,15 @@ TRACING=1
 
 # CYPHERNODE VERSION "v0.6.0-dev", dev over v0.6.0
 CONF_VERSION="v0.6.0-dev-local"
-GATEKEEPER_VERSION="v0.6.0-dev-local"
+ADMIN_VERSION="v0.6.0-dev-local"
 TOR_VERSION="v0.6.0-dev-local"
 PROXY_VERSION="v0.6.0-dev-local"
 NOTIFIER_VERSION="v0.6.0-dev-local"
 PROXYCRON_VERSION="v0.6.0-dev-local"
 OTSCLIENT_VERSION="v0.6.0-dev-local"
 PYCOIN_VERSION="v0.6.0-dev-local"
+BITCOIN_VERSION="v0.20.1"
+LIGHTNING_VERSION="v0.9.1"
 
 trace()
 {
@@ -32,9 +34,11 @@ build_docker_images() {
   trace "Creating cyphernodeconf image"
   docker build  cyphernodeconf_docker/ -t cyphernode/cyphernodeconf:$CONF_VERSION
 
+  trace "Creating cyphernodeadmin image"
+  docker build  cyphernodeadmin_docker/ -t cyphernode/cyphernodeadmin:$ADMIN_VERSION
+
   trace "Creating cyphernode images"
-  docker build api_auth_docker/ -t cyphernode/gatekeeper:$GATEKEEPER_VERSION \
-  && docker build tor_docker/ -t cyphernode/tor:$TOR_VERSION \
+  docker build tor_docker/ -t cyphernode/tor:$TOR_VERSION \
   && docker build proxy_docker/ -t cyphernode/proxy:$PROXY_VERSION \
   && docker build notifier_docker/ -t cyphernode/notifier:$NOTIFIER_VERSION \
   && docker build cron_docker/ -t cyphernode/proxycron:$PROXYCRON_VERSION \
