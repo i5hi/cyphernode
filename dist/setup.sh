@@ -649,27 +649,31 @@ install_docker() {
   copy_file $cyphernodeconf_filepath/installer/stop.sh $current_path/stop.sh 0
   copy_file $cyphernodeconf_filepath/installer/testdeployment.sh $current_path/testdeployment.sh 0
 
-  if [[ ! -x $current_path/start.sh ]]; then
+   if ${sudo} [ ! -x $current_path/start.sh ]; then
     step "     [32mmake[0m start.sh executable"
-    try chmod +x $current_path/start.sh
+    sudo_if_required chown -R $USER $current_path/start.sh
+    sudo_if_required chmod +x $current_path/start.sh
     next
   fi
 
-  if [[ ! -x $current_path/stop.sh ]]; then
+  if ${sudo} [ ! -x $current_path/stop.sh ]; then
     step "     [32mmake[0m stop.sh executable"
-    try chmod +x $current_path/stop.sh
+    sudo_if_required chown -R $USER $current_path/stop.sh
+    sudo_if_required chmod +x $current_path/stop.sh
     next
   fi
 
-  if [[ ! -x $current_path/testfeatures.sh ]]; then
+  if ${sudo} [ ! -x $current_path/testfeatures.sh ]; then
     step "     [32mmake[0m testfeatures.sh executable"
-    try chmod +x $current_path/testfeatures.sh
+    sudo_if_required chown -R $USER $current_path/testfeatures.sh
+    sudo_if_required chmod +x $current_path/testfeatures.sh
     next
   fi
 
-  if [[ ! -x $current_path/testdeployment.sh ]]; then
+  if ${sudo} [ ! -x $current_path/testdeployment.sh ]; then
     step "     [32mmake[0m testdeployment.sh executable"
-    try chmod +x $current_path/testdeployment.sh
+    sudo_if_required chown -R $USER $current_path/testdeployment.sh
+    sudo_if_required chmod +x $current_path/testdeployment.sh
     next
   fi
 }
